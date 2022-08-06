@@ -1214,6 +1214,8 @@ class IrModelSelection(models.Model):
                               'preferably through a custom addon!'))
 
         for selection in self:
+            if selection.field_id.model not in self.env:
+                continue
             if selection.field_id.store and \
                     not self.env[selection.field_id.model]._abstract:
                 # replace the value by NULL in the field's corresponding column
